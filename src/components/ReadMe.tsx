@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { Counter, TodoList } from './DemoComponents';
 import { DragDrop } from './DemoComponents';
+import { KanbanDragDrop } from './DragDrop';
 
 interface ReadMeProps {
     onLocaleChange?: (locale: string) => void;
@@ -51,11 +52,14 @@ export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
                     customComponents={customComponents}
                 />
             </div>
-            {/* 挂载演示组件 */}
-            <div className="demo-components">
+			<div className="demo-components">
                 <Counter />
                 <TodoList />
 				<DragDrop />
+			</div>
+            <div className="kanban-section">
+                <h2>看板</h2>
+                <KanbanDragDrop />
             </div>
         </div>
     );
