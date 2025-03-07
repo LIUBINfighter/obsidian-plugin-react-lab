@@ -4,6 +4,12 @@
 
 技术验证
 
+对于冲突的包
+
+```bash
+npm i --legacy-peer-deps
+```
+
 ```ts
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 

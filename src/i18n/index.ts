@@ -14,7 +14,8 @@ i18n
         resources,
         lng: 'en',
         interpolation: {
-            escapeValue: false
+            escapeValue: false,
+            skipOnVariables: false  // 添加这个配置以确保嵌套变量能够正确解析
         }
     });
 
