@@ -53,6 +53,11 @@ export class ReadMeView extends ItemView {
             React.createElement(ReadMe, {
                 onLocaleChange: async (locale: string) => {
                     await this.plugin.saveData({ ...savedData, locale });
+                },
+                kanbanLayout: this.plugin.settings.kanbanLayout,
+                onLayoutChange: async (layout) => {
+                    this.plugin.settings.kanbanLayout = layout;
+                    await this.plugin.saveSettings();
                 }
             })
         );
