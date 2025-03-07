@@ -50,11 +50,12 @@ export const DragDrop: React.FC = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [isOver, setIsOver] = useState(false);
     const [droppedItem, setDroppedItem] = useState<string | null>(null);
+    const [dragText, setDragText] = useState('');
     const { t } = useTranslation();
 
     const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
         setIsDragging(true);
-        e.dataTransfer.setData('text/plain', 'draggable-item');
+        e.dataTransfer.setData('text/plain', dragText || t('demos.dragdrop.drag'));
     };
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -69,21 +70,26 @@ export const DragDrop: React.FC = () => {
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         const data = e.dataTransfer.getData('text/plain');
-        if (data === 'draggable-item') {
-            setDroppedItem(t('demos.dragdrop.dropped'));
-        }
+        setDroppedItem(data);
         setIsOver(false);
         setIsDragging(false);
     };
 
     return (
         <div className="demo-dragdrop">
+            <div>
+                <input
+                    value={dragText}
+                    onChange={(e) => setDragText(e.target.value)}
+                    placeholder={t('demos.dragdrop.enterText')}
+                />
+            </div>
             <div
                 className={`draggable-item ${isDragging ? 'dragging' : ''}`}
                 draggable
                 onDragStart={handleDragStart}
             >
-                {t('demos.dragdrop.drag')}
+                {dragText || t('demos.dragdrop.drag')}
             </div>
             <div
                 className={`drop-zone ${isOver ? 'over' : ''}`}
