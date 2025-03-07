@@ -74,6 +74,17 @@
     align-items: flex-start;
 }
 
+.board-content.vertical {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.board-content.vertical .column {
+    width: 100%;
+    max-width: none;
+}
+
 .column {
     min-width: 280px;
     max-width: 280px;
@@ -186,5 +197,119 @@
     .export-btn {
         width: 100%;
         margin-top: 8px;
+    }
+}
+
+/* 三列布局基础样式 */
+.three-column-layout {
+    display: flex;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.column-left,
+.column-right {
+    position: relative;
+    background-color: var(--background-secondary);
+    transition: width 0.3s ease;
+    min-width: 0;
+}
+
+.column-center {
+    flex: 1;
+    min-width: 0;
+    background-color: var(--background-primary);
+    padding: 16px;
+}
+
+/* 拖拽调整宽度的样式 */
+.resizer {
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background-color: var(--background-modifier-border);
+    cursor: col-resize;
+    transition: background-color 0.2s ease;
+}
+
+.resizer:hover,
+.resizer.dragging {
+    background-color: var(--interactive-accent);
+}
+
+.resizer-left {
+    right: 0;
+    top: 0;
+}
+
+.resizer-right {
+    left: 0;
+    top: 0;
+}
+
+/* 折叠按钮样式 */
+.column-toggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    padding: 4px;
+    background-color: var(--background-secondary-alt);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.column-toggle:hover {
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+}
+
+.column-toggle-left {
+    right: -20px;
+}
+
+.column-toggle-right {
+    left: -20px;
+}
+
+/* 折叠状态样式 */
+.column-left.collapsed,
+.column-right.collapsed {
+    width: 0 !important;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.column-left.collapsed .column-toggle-left {
+    right: -24px;
+}
+
+.column-right.collapsed .column-toggle-right {
+    left: -24px;
+}
+
+/* 响应式布局 */
+@media screen and (max-width: 768px) {
+    .three-column-layout {
+        flex-direction: column;
+    }
+
+    .column-left,
+    .column-right {
+        width: 100% !important;
+        height: 300px;
+    }
+
+    .resizer {
+        display: none;
+    }
+
+    .column-toggle {
+        display: none;
     }
 }

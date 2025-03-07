@@ -5,7 +5,8 @@ import { ReadMeView } from "./views/readme-view";
 
 
 const DEFAULT_SETTINGS: ReactLabSettings = {
-    setting: 'default'
+    setting: 'default',
+    kanbanLayout: 'horizontal'
 }
 
 export default class ReactLabPlugin extends Plugin {

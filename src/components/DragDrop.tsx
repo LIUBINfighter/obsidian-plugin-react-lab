@@ -28,6 +28,7 @@ interface KanbanData {
 
 interface KanbanDragDropProps {
   initialData?: KanbanData;
+  layout?: 'horizontal' | 'vertical';
 }
 
 const initialData: KanbanData = {
@@ -43,7 +44,7 @@ const initialData: KanbanData = {
   boardOrder: ['board-1'],
 };
 
-export const KanbanDragDrop: React.FC<KanbanDragDropProps> = ({ initialData: propInitialData }) => {
+export const KanbanDragDrop: React.FC<KanbanDragDropProps> = ({ initialData: propInitialData, layout = 'horizontal' }) => {
   const [data, setData] = useState<KanbanData>(propInitialData || initialData);
   const [activeBoard, setActiveBoard] = useState<string>(data.boardOrder[0]);
   const [editingColumnId, setEditingColumnId] = useState<string | null>(null);
@@ -264,7 +265,7 @@ export const KanbanDragDrop: React.FC<KanbanDragDropProps> = ({ initialData: pro
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="board-content"
+              className={`board-content ${layout === 'vertical' ? 'vertical' : ''}`
             >
               {data.boards[activeBoard].columnIds.map((columnId, index) => {
                 const column = data.columns[columnId];

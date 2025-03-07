@@ -5,9 +5,13 @@ import { Counter, TodoList } from './DemoComponents';
 import { DragDrop } from './DemoComponents';
 import { KanbanDragDrop } from './DragDrop';
 import { ThreeColumnLayout } from './ThreeColumnLayout';
+import { KanbanLayout } from '../types';
+import { useApp } from 'obsidian';
 
 interface ReadMeProps {
     onLocaleChange?: (locale: string) => void;
+    kanbanLayout: KanbanLayout;
+    onLayoutChange: (layout: KanbanLayout) => void;
 }
 
 export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
