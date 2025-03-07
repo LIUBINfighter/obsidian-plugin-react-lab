@@ -46,6 +46,9 @@ const initialData: KanbanData = {
 export const KanbanDragDrop: React.FC<KanbanDragDropProps> = ({ initialData: propInitialData }) => {
   const [data, setData] = useState<KanbanData>(propInitialData || initialData);
   const [activeBoard, setActiveBoard] = useState<string>(data.boardOrder[0]);
+  const [editingColumnId, setEditingColumnId] = useState<string | null>(null);
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState<string>('');
 
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId, type } = result;
@@ -274,13 +277,61 @@ export const KanbanDragDrop: React.FC<KanbanDragDropProps> = ({ initialData: pro
                         {...provided.dragHandleProps}
                         className="column"
                       >
-                        <h3>{column.title}</h3>
+                        <div>
+                          {editingColumnId === columnId ? (
+                            <input
+                              className="column-title-edit"
+                              value={editValue}
+                              onChange={(e) => setEditValue(e.target.value)}
+                              onBlur={() => {
+                                setData({
+                                  ...data,
+                                  columns: {
+                                    ...data.columns,
+                                    [columnId]: {
+                                      ...column,
+                                      title: editValue,
+                                    },
+                                  },
+                                });
+                                setEditingColumnId(null);
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  setData({
+                                    ...data,
+                                    columns: {
+                                      ...data.columns,
+                                      [columnId]: {
+                                        ...column,
+                                        title: editValue,
+                                      },
+                                    },
+                                  });
+                                  setEditingColumnId(null);
+                                } else if (e.key === 'Escape') {
+                                  setEditingColumnId(null);
+                                }
+                              }}
+                              autoFocus
+                            />
+                          ) : (
+                            <h3
+                              onDoubleClick={() => {
+                                setEditingColumnId(columnId);
+                                setEditValue(column.title);
+                              }}
+                            >
+                              {column.title}
+                            </h3>
+                          )}
+                        </div>
                         <Droppable droppableId={columnId} type="CARD">
-                          {(provided) => (
+                          {(provided, snapshot) => (
                             <div
                               ref={provided.innerRef}
                               {...provided.droppableProps}
-                              className="card-list"
+                              className={`card-list ${snapshot.isDraggingOver ? 'drag-over' : ''}`}
                             >
                               {column.cardIds.map((cardId, index) => {
                                 const card = data.cards[cardId];
@@ -290,14 +341,48 @@ export const KanbanDragDrop: React.FC<KanbanDragDropProps> = ({ initialData: pro
                                     draggableId={cardId}
                                     index={index}
                                   >
-                                    {(provided) => (
+                                    {(provided, snapshot) => (
                                       <div
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
-                                        className="card"
+                                        className={`card ${snapshot.isDragging ? 'dragging' : ''} ${snapshot.draggingOver ? 'drag-over' : ''}`}
                                       >
-                                        <MarkdownRenderer content={card.content} />
+                                        {editingCardId === cardId ? (
+                                          <div
+                                            contentEditable
+                                            className="card-edit"
+                                            onBlur={(e) => {
+                                              setData({
+                                                ...data,
+                                                cards: {
+                                                  ...data.cards,
+                                                  [cardId]: {
+                                                    ...card,
+                                                    content: e.target.innerText,
+                                                  },
+                                                },
+                                              });
+                                              setEditingCardId(null);
+                                            }}
+                                            onKeyDown={(e) => {
+                                              if (e.key === 'Enter' && e.ctrlKey) {
+                                                e.preventDefault();
+                                                e.currentTarget.blur();
+                                              } else if (e.key === 'Escape') {
+                                                setEditingCardId(null);
+                                              }
+                                            }}
+                                            suppressContentEditableWarning
+                                            onDoubleClick={(e) => e.stopPropagation()}
+                                          >
+                                            {card.content}
+                                          </div>
+                                        ) : (
+                                          <div onDoubleClick={() => setEditingCardId(cardId)}>
+                                            <MarkdownRenderer content={card.content} />
+                                          </div>
+                                        )}
                                       </div>
                                     )}
                                   </Draggable>

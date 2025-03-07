@@ -21,21 +21,27 @@
     outline: none;
     min-width: 100px;
 }
-
+.export-btn {
+    margin-left: 8px;
+    padding: 4px 8px;
+    background-color: #4a9eff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
 .language-selector select:hover {
     border-color: var(--interactive-accent);
     box-shadow: 0 0 0 1px var(--interactive-accent-hover);
 }
-
 .language-selector select:focus {
     border-color: var(--interactive-accent);
     box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.4);
 }
-
 .content {
     margin-top: 48px;
 }
-
 /* 通用按钮样式 */
 .obsidian-button {
     background-color: var(--interactive-normal);
@@ -47,16 +53,13 @@
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .obsidian-button:hover {
     background-color: var(--interactive-hover);
 }
-
 .obsidian-button:active {
     background-color: var(--interactive-accent);
     color: var(--text-on-accent);
 }
-
 /* 输入框样式 */
 .obsidian-input {
     background-color: var(--background-primary);
@@ -68,13 +71,11 @@
     width: 100%;
     transition: all 0.2s ease;
 }
-
 .obsidian-input:focus {
     border-color: var(--interactive-accent);
     box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.4);
     outline: none;
 }
-
 /* 卡片容器样式 */
 .obsidian-card {
     background-color: var(--background-primary);
@@ -84,20 +85,17 @@
     margin: 8px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
 /* 列表样式 */
 .obsidian-list {
     list-style: none;
     padding: 0;
     margin: 8px 0;
 }
-
 .obsidian-list li {
     padding: 8px 12px;
     border-bottom: 1px solid var(--background-modifier-border);
     color: var(--text-normal);
 }
-
 /* DragDrop组件样式 */
 .demo-dragdrop {
     display: flex;
@@ -105,12 +103,10 @@
     gap: 16px;
     padding: 16px;
 }
-
 .demo-dragdrop input {
     composes: obsidian-input;
     max-width: 300px;
 }
-
 .draggable-item {
     background-color: var(--interactive-normal);
     border: 1px solid var(--background-modifier-border);
@@ -122,18 +118,15 @@
     user-select: none;
     max-width: 300px;
 }
-
 .draggable-item:hover {
     background-color: var(--interactive-hover);
     transform: translateY(-2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .draggable-item.dragging {
     opacity: 0.6;
     cursor: grabbing;
 }
-
 .drop-zone {
     border: 2px dashed var(--background-modifier-border);
     border-radius: 6px;
@@ -146,17 +139,14 @@
     transition: all 0.2s ease;
     color: var(--text-muted);
 }
-
 .drop-zone.over {
     border-color: var(--interactive-accent);
     background-color: var(--background-modifier-hover);
     box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.2);
 }
-
 .obsidian-list li:last-child {
     border-bottom: none;
 }
-
 /* 看板系统样式 */
 .kanban-container {
     display: flex;
@@ -164,8 +154,8 @@
     gap: 16px;
     padding: 16px;
     height: 100%;
+    overflow: hidden;
 }
-
 .board-tabs {
     display: flex;
     gap: 8px;
@@ -173,7 +163,6 @@
     border-bottom: 1px solid var(--background-modifier-border);
     overflow-x: auto;
 }
-
 .board-tab {
     padding: 8px 16px;
     border: none;
@@ -184,17 +173,14 @@
     transition: all 0.2s ease;
     white-space: nowrap;
 }
-
 .board-tab:hover {
     background: var(--background-modifier-hover);
     color: var(--text-normal);
 }
-
 .board-tab.active {
     background: var(--interactive-accent);
     color: var(--text-on-accent);
 }
-
 .board-content {
     display: flex;
     gap: 16px;
@@ -202,8 +188,8 @@
     padding: 8px;
     min-height: 200px;
     align-items: flex-start;
+    height: calc(100vh - 150px);
 }
-
 .column {
     background: var(--background-primary-alt);
     border-radius: 6px;
@@ -212,18 +198,49 @@
     max-width: 280px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
 .column h3 {
     margin: 0 0 12px 0;
     padding: 8px;
     border-bottom: 2px solid var(--background-modifier-border);
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
 }
 
+.column h3:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+.column-title-edit {
+    width: 100%;
+    margin: 0 0 12px 0;
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-bottom: 2px solid var(--interactive-accent);
+    background-color: var(--background-primary);
+    color: var(--text-normal);
+    outline: none;
+}
 .card-list {
     min-height: 100px;
     padding: 4px;
+    height: calc(100% - 80px);
+    overflow-y: visible;
+    position: relative;
+}
+
+.card-list.drag-over::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    height: 2px;
+    background-color: var(--interactive-accent);
+    box-shadow: 0 0 8px rgba(var(--interactive-accent-rgb), 0.4);
+    pointer-events: none;
+    transition: all 0.2s ease;
 }
 
 .card {
@@ -234,14 +251,52 @@
     margin-bottom: 8px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
+.card.dragging {
+    opacity: 0.5;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card.drag-over {
+    border: 2px dashed var(--interactive-accent);
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.card.drag-over::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -16px;
+    height: 2px;
+    background-color: var(--interactive-accent);
+    box-shadow: 0 0 8px rgba(var(--interactive-accent-rgb), 0.4);
+}
+
+.card.dropped {
+    animation: cardDrop 0.3s ease-out forwards;
+}
+
+@keyframes cardDrop {
+    0% {
+        transform: translateY(-5px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 2px var(--interactive-accent),
+                  0 4px 8px rgba(var(--interactive-accent-rgb), 0.2);
+    }
+}
 .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     border-color: var(--interactive-accent);
 }
-
 .column button,
 .board-tabs button {
     background: var(--background-secondary);
@@ -254,14 +309,12 @@
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .column button:hover,
 .board-tabs button:hover {
     background: var(--background-modifier-hover);
     color: var(--text-normal);
     border-color: var(--interactive-accent);
 }
-
 /* 标签样式 */
 .obsidian-tag {
     background-color: var(--tag-background);
@@ -272,14 +325,12 @@
     display: inline-block;
     margin: 2px;
 }
-
 /* 分割线样式 */
 .obsidian-divider {
     border: none;
     border-top: 1px solid var(--background-modifier-border);
     margin: 16px 0;
 }
-
 /* Demo 组件样式 */
 .demo-counter {
     padding: 16px;
@@ -287,23 +338,19 @@
     border-radius: 6px;
     margin: 16px 0;
 }
-
 .demo-todo {
     padding: 16px;
     background-color: var(--background-primary-alt);
     border-radius: 6px;
     margin: 16px 0;
 }
-
 .demo-todo input {
     margin-right: 8px;
 }
-
 .demo-todo ul {
     margin-top: 12px;
     padding-left: 0;
 }
-
 .demo-todo li {
     list-style: none;
     padding: 8px;
@@ -312,7 +359,6 @@
     border: 1px solid var(--background-modifier-border);
     border-radius: 4px;
 }
-
 /* 动画效果 */
 .fade-in {
     animation: fadeIn 0.3s ease-in;
