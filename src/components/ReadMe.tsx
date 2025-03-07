@@ -5,7 +5,7 @@ interface ReadMeContentProps {
     onLocaleChange?: (locale: string) => void;
 }
 
-export const ReadMeContent: React.FC<ReadMeContentProps> = ({ onLocaleChange }) => {
+export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
     const { t, i18n } = useTranslation();
 
     const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

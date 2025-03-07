@@ -2,8 +2,9 @@ import { ItemView, WorkspaceLeaf } from "obsidian";
 import { VIEW_TYPES } from "../types";
 import { createRoot } from 'react-dom/client';
 import React from 'react';
-import { Example } from '../components/Example';
+import { ReadMe } from '../components/ReadMe';
 import type ReactLabPlugin from '../main';
+import { i18n } from '../i18n';
 
 export class ReadMeView extends ItemView {
     private plugin: ReactLabPlugin;  // 修改类型定义
@@ -32,7 +33,6 @@ export class ReadMeView extends ItemView {
 
     async onOpen() {
         this.clearStatusBar();
-        // 注册选项卡切换事件监听器
         this.activeLeafHandler = () => this.clearStatusBar();
         this.app.workspace.on('active-leaf-change', this.activeLeafHandler);
 
@@ -42,9 +42,19 @@ export class ReadMeView extends ItemView {
         
         const mountPoint = container.createDiv('react-root');
         
+        // 从设置中读取语言
+        const savedData = await this.plugin.loadData() || {};
+        if (savedData.locale) {
+            i18n.changeLanguage(savedData.locale);
+        }
+        
         this.root = createRoot(mountPoint);
         this.root.render(
-            React.createElement(Example, {})
+            React.createElement(ReadMe, {
+                onLocaleChange: async (locale: string) => {
+                    await this.plugin.saveData({ ...savedData, locale });
+                }
+            })
         );
     }
 
