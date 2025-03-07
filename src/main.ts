@@ -1,6 +1,7 @@
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 import { VIEW_TYPES, ReactLabSettings } from "./types";
 import { ReactLabSettingTab } from "./setting-tab";
+import { ReadMeView } from "./views/readme-view";
 
 
 const DEFAULT_SETTINGS: ReactLabSettings = {
@@ -10,7 +11,27 @@ const DEFAULT_SETTINGS: ReactLabSettings = {
 export default class ReactLabPlugin extends Plugin {
     settings: ReactLabSettings;
     
-	async onload() {
+    // 添加 activateView 方法
+    async activateView(viewType = VIEW_TYPES.README) {
+        const { workspace } = this.app;
+        
+        // 检查视图是否已经打开
+        let leaf = workspace.getLeavesOfType(viewType)[0];
+        
+        if (!leaf) {
+            // 如果视图未打开，创建新的叶子并打开视图
+            leaf = workspace.getLeaf(false);
+            await leaf.setViewState({
+                type: viewType,
+                active: true
+            });
+        }
+        
+        // 聚焦到视图
+        workspace.revealLeaf(leaf);
+    }
+
+    async onload() {
 		await this.loadSettings();
 		this.addSettingTab(new ReactLabSettingTab(this.app, this));
 
@@ -35,8 +56,8 @@ export default class ReactLabPlugin extends Plugin {
             // 激活视图
             this.activateView();
             }
-		);
-	}
+        );
+    }
 
 	async onunload() {
 
@@ -49,58 +70,6 @@ export default class ReactLabPlugin extends Plugin {
 	async saveSettings() {
 		await this.saveData(this.settings);
 	}
-	    // 修改 activateView 方法
-		async activateView() {
-			const { workspace } = this.app;
-			
-			let leaf = workspace.getLeavesOfType(VIEW_TYPES.README)[0];
-			if (!leaf) {
-				leaf = workspace.getLeaf(true);
-				await leaf.setViewState({
-					type: VIEW_TYPES.README,
-					active: true,
-				});
-			}
-			// 监听视图状态变化
-			// 注册视图状态变化监听
-			this.registerEvent(
-				this.app.workspace.on('active-leaf-change', (leaf) => {
-					if (leaf?.view instanceof ReadMeView) {
-						// 获取 status bar
-						const statusBarEl = this.app.workspace.containerEl.querySelector('.status-bar');
-						if (statusBarEl) {
-							statusBarEl.empty();
-							
-							// 创建通知按钮
-							const noticeBtn = statusBarEl.createEl('button', {
-								text: '显示通知',
-								cls: 'status-bar-item'
-							});
-							
-							noticeBtn.addEventListener('click', () => {
-								this.app.notices.show('这是一条来自 Vue Lab 的通知！', 3000);
-							});
-						}
-					}
-				})
-			);
-			workspace.revealLeaf(leaf);
-		}
-		// 添加 activateGalleryView 方法
-		async activateGalleryView() {
-			const { workspace } = this.app;
-			
-			let leaf = workspace.getLeavesOfType(VIEW_TYPES.GALLERY)[0];
-			if (!leaf) {
-				leaf = workspace.getLeaf(true);
-				await leaf.setViewState({
-					type: VIEW_TYPES.GALLERY,
-					active: true,
-				});
-			}
-			workspace.revealLeaf(leaf);
-		}
-	
 	
 }
 
