@@ -4,6 +4,7 @@ import { MarkdownRenderer } from './MarkdownRenderer';
 import { Counter, TodoList } from './DemoComponents';
 import { DragDrop } from './DemoComponents';
 import { KanbanDragDrop } from './DragDrop';
+import { ThreeColumnLayout } from './ThreeColumnLayout';
 
 interface ReadMeProps {
     onLocaleChange?: (locale: string) => void;
@@ -61,6 +62,11 @@ export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
                 <h2>看板</h2>
                 <KanbanDragDrop />
             </div>
+            <ThreeColumnLayout
+                leftContent={<div>左侧内容区域</div>}
+                centerContent={<div>中间内容区域</div>}
+                rightContent={<div>右侧内容区域</div>}
+            />
         </div>
     );
 };

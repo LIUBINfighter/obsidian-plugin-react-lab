@@ -154,6 +154,7 @@
     gap: 16px;
     padding: 16px;
     height: 100%;
+    min-height: 400px;
     overflow: hidden;
 }
 .board-tabs {
@@ -196,6 +197,7 @@
     padding: 12px;
     min-width: 280px;
     max-width: 280px;
+    min-height: 300px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 .column h3 {
@@ -370,4 +372,96 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* 三栏布局样式 */
+.three-column-layout {
+    display: flex;
+    width: 100%;
+    margin-top: 20px    position: relative;
+    min-height: 600px;
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+.column-left,
+.column-right,
+.column-center {
+    background: var(--background-primary);
+    padding: 16px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.column-left,
+.column-right {
+    min-width: 200px;
+    max-width: 400px;
+    width: 25%;
+}
+
+.column-center {
+    flex: 1;
+    min-width: 300px;
+    border-left: 1px solid var(--background-modifier-border);
+    border-right: 1px solid var(--background-modifier-border);
+}
+
+.resizer {
+    width: 4px;
+    cursor: col-resize;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: var(--background-modifier-border);
+    transition: background 0.2s ease;
+}
+
+.resizer:hover,
+.resizer.dragging {
+    background: var(--interactive-accent);
+}
+
+.resizer-left {
+    right: 0;
+}
+
+.resizer-right {
+    left: 0;
+}
+
+.column-toggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.2s ease;
+}
+
+.column-toggle:hover {
+    background: var(--background-modifier-hover);
+}
+
+.column-toggle-left {
+    right: -12px;
+}
+
+.column-toggle-right {
+    left: -12px;
+}
+
+.column-left.collapsed {
+    width: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+.column-right.collapsed {
+    width: 0;
+    padding: 0;
+    min-width: 0;
 }
