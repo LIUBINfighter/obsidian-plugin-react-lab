@@ -231,6 +231,7 @@
     position: relative;
 }
 
+.card-list.drag-over::before,
 .card-list.drag-over::after {
     content: '';
     position: absolute;
@@ -241,6 +242,14 @@
     box-shadow: 0 0 8px rgba(var(--interactive-accent-rgb), 0.4);
     pointer-events: none;
     transition: all 0.2s ease;
+}
+
+.card-list.drag-over::before {
+    top: 4px;
+}
+
+.card-list.drag-over::after {
+    bottom: 4px;
 }
 
 .card {
@@ -262,19 +271,7 @@
 
 .card.drag-over {
     border: 2px dashed var(--interactive-accent);
-    margin-bottom: 24px;
     position: relative;
-}
-
-.card.drag-over::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -16px;
-    height: 2px;
-    background-color: var(--interactive-accent);
-    box-shadow: 0 0 8px rgba(var(--interactive-accent-rgb), 0.4);
 }
 
 .card.dropped {
