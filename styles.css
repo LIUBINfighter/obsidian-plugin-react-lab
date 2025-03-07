@@ -15,6 +15,21 @@
     border: 1px solid var(--background-modifier-border);
     background-color: var(--background-primary);
     color: var(--text-normal);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    outline: none;
+    min-width: 100px;
+}
+
+.language-selector select:hover {
+    border-color: var(--interactive-accent);
+    box-shadow: 0 0 0 1px var(--interactive-accent-hover);
+}
+
+.language-selector select:focus {
+    border-color: var(--interactive-accent);
+    box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.4);
 }
 
 .content {

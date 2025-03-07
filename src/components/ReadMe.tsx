@@ -28,6 +28,7 @@ export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
             <div className="content">
                 <h1>{t('welcome')}</h1>
                 <h2>{t('settings.title')}</h2>
+                <p>{t('settings.content')}</p>
             </div>
         </div>
     );
