@@ -35,3 +35,136 @@
 .content {
     margin-top: 48px;
 }
+
+/* 通用按钮样式 */
+.obsidian-button {
+    background-color: var(--interactive-normal);
+    color: var(--text-normal);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.obsidian-button:hover {
+    background-color: var(--interactive-hover);
+}
+
+.obsidian-button:active {
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+}
+
+/* 输入框样式 */
+.obsidian-input {
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    padding: 6px 12px;
+    color: var(--text-normal);
+    font-size: 14px;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.obsidian-input:focus {
+    border-color: var(--interactive-accent);
+    box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.4);
+    outline: none;
+}
+
+/* 卡片容器样式 */
+.obsidian-card {
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    padding: 16px;
+    margin: 8px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 列表样式 */
+.obsidian-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+}
+
+.obsidian-list li {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    color: var(--text-normal);
+}
+
+.obsidian-list li:last-child {
+    border-bottom: none;
+}
+
+/* 标签样式 */
+.obsidian-tag {
+    background-color: var(--tag-background);
+    color: var(--tag-color);
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 12px;
+    display: inline-block;
+    margin: 2px;
+}
+
+/* 分割线样式 */
+.obsidian-divider {
+    border: none;
+    border-top: 1px solid var(--background-modifier-border);
+    margin: 16px 0;
+}
+
+/* Demo 组件样式 */
+.demo-counter {
+    padding: 16px;
+    background-color: var(--background-primary-alt);
+    border-radius: 6px;
+    margin: 16px 0;
+}
+
+.demo-todo {
+    padding: 16px;
+    background-color: var(--background-primary-alt);
+    border-radius: 6px;
+    margin: 16px 0;
+}
+
+.demo-todo input {
+    margin-right: 8px;
+}
+
+.demo-todo ul {
+    margin-top: 12px;
+    padding-left: 0;
+}
+
+.demo-todo li {
+    list-style: none;
+    padding: 8px;
+    margin: 4px 0;
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+}
+
+/* 动画效果 */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

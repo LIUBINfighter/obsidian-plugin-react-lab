@@ -1,6 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarkdownRenderer } from './MarkdownRenderer';
+import { Counter, TodoList } from './DemoComponents';
+import { DragDrop } from './DemoComponents';
 
 interface ReadMeProps {
     onLocaleChange?: (locale: string) => void;
@@ -27,6 +29,11 @@ export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
         'readme.features.mermaid': t('readme.features.mermaid')
     });
 
+    const customComponents = {
+        'demo-counter': Counter,
+        'demo-todo': TodoList
+    };
+
     return (
         <div className="readme-container">
             <div className="language-selector">
@@ -39,7 +46,16 @@ export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
                 </select>
             </div>
             <div className="content">
-                <MarkdownRenderer content={markdownContent} />
+                <MarkdownRenderer 
+                    content={markdownContent} 
+                    customComponents={customComponents}
+                />
+            </div>
+            {/* 挂载演示组件 */}
+            <div className="demo-components">
+                <Counter />
+                <TodoList />
+				<DragDrop />
             </div>
         </div>
     );

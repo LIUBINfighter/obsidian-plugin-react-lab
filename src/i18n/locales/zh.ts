@@ -5,6 +5,19 @@ export default {
 			"title": "设置",
 			"content": "你可以在右上角设置语言。"
 		},
+		"demos": {
+			"title": "React 组件示例",
+			"counter": {
+				"title": "计数器示例",
+				"value": "当前计数：{{count}}",
+				"increment": "增加"
+			},
+			"todo": {
+				"title": "待办事项示例",
+				"placeholder": "输入新待办事项...",
+				"add": "添加"
+			}
+		},
 		"readme": {
 			"features": {
 				"title": "功能特性",
@@ -52,7 +65,17 @@ graph LR
     C --> E[渲染界面]
     D --> E
 \`\`\`
+
+### React 组件示例
+
+#### {{demos.counter.title}}
+
+<demo-counter></demo-counter>
+
+#### {{demos.todo.title}}
+
+<demo-todo></demo-todo>
 `
-		}
-	}
+        }
+    }
 };

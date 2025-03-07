@@ -5,6 +5,19 @@ export default {
 			"title": "Settings",
 			"content": "You can change the language in the top right corner."  // 更新这一行
 		},
+		"demos": {
+			"title": "React Component Demos",
+			"counter": {
+				"title": "Counter Demo",
+				"value": "Current count: {{count}}",
+				"increment": "Increment"
+			},
+			"todo": {
+				"title": "Todo List Demo",
+				"placeholder": "Enter new todo...",
+				"add": "Add"
+			}
+		},
 		"readme": {
 			"features": {
 				"title": "Features",
@@ -52,7 +65,17 @@ graph LR
     C --> E[Render UI]
     D --> E
 \`\`\`
+
+### React Component Demos
+
+#### {{demos.counter.title}}
+
+<demo-counter></demo-counter>
+
+#### {{demos.todo.title}}
+
+<demo-todo></demo-todo>
 `
-		}
-	}
+        }
+    }
 };
