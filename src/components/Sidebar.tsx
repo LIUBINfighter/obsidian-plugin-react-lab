@@ -10,7 +10,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
     const { t } = useTranslation();
     const [width, setWidth] = useState(250);
     const [isDragging, setIsDragging] = useState(false);
+    const [activeTab, setActiveTab] = useState<string>('tab1');
     const dragHandleRef = useRef<HTMLDivElement>(null);
+
+    // 定义标签页配置
+    const tabs = [
+        { id: 'tab1', icon: '📝', label: '笔记' },
+        { id: 'tab2', icon: '🔍', label: '搜索' },
+        { id: 'tab3', icon: '⚙️', label: '设置' },
+    ];
 
     const handleDragStart = useCallback((e: React.MouseEvent) => {
         setIsDragging(true);
@@ -26,6 +34,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
 
     const handleDragEnd = useCallback(() => {
         setIsDragging(false);
+    }, []);
+
+    const handleTabChange = useCallback(() => {
+        setActiveTab(prev => prev === 'tab1' ? 'tab2' : 'tab1');
     }, []);
 
     useEffect(() => {
@@ -51,14 +63,45 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
             >
                 {isOpen ? '→' : '←'}
             </button>
+            
+            <div className="sidebar-tabs">
+                {tabs.map(tab => (
+                    <button
+                        key={tab.id}
+                        className={`sidebar-tab ${activeTab === tab.id ? 'active' : ''}`}
+                        onClick={() => setActiveTab(tab.id)}
+                        title={tab.label}
+                    >
+                        {tab.icon}
+                    </button>
+                ))}
+            </div>
+
             <div 
                 ref={dragHandleRef}
                 className="sidebar-drag-handle"
                 onMouseDown={handleDragStart}
             />
+            
             <div className="sidebar-content">
-                <h3>{t('sidebar.title')}</h3>
-                <p>{t('sidebar.content')}</p>
+                {activeTab === 'tab1' && (
+                    <>
+                        <h3>{t('sidebar.title')}</h3>
+                        <p>{t('sidebar.content')}</p>
+                    </>
+                )}
+                {activeTab === 'tab2' && (
+                    <>
+                        <h3>{t('sidebar.tab2.title')}</h3>
+                        <p>{t('sidebar.tab2.content')}</p>
+                    </>
+                )}
+                {activeTab === 'tab3' && (
+                    <>
+                        <h3>{t('sidebar.tab3.title')}</h3>
+                        <p>{t('sidebar.tab3.content')}</p>
+                    </>
+                )}
             </div>
         </div>
     );
