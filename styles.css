@@ -23,7 +23,7 @@
 }
 .sidebar-toggle {
     position: absolute;
-    left: -15px; /* 调整到 resize 条右侧 */
+    left: -25px; /* 调整到 resize 条右侧 */
     top: 10%;
     transform: translateY(-50%);
     width: 30px;
