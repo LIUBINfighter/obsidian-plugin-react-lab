@@ -7,7 +7,7 @@ export default {
 		"welcome": "欢迎来到Jay的React Lab!",
 		"settings": {
 			"title": "设置",
-			"content": "你可以在右上角设置语言。"
+			"content": "你可以在左上角设置语言。"
 		},
 		"demos": {
 			"title": "React 组件示例",

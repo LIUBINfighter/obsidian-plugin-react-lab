@@ -11,6 +11,7 @@ interface MarkdownRendererProps {
 export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, customComponents = {} }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const componentRoots = useRef<Map<HTMLElement, Root>>(new Map());
+    const clickHandlerRef = useRef<(event: MouseEvent) => void>();
 
     useEffect(() => {
         if (containerRef.current) {
@@ -47,8 +48,13 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cus
                 });
             });
 
-            // 添加内部链接点击事件处理
-            containerRef.current.addEventListener('click', (event) => {
+            // 移除旧的事件监听器
+            if (clickHandlerRef.current) {
+                containerRef.current.removeEventListener('click', clickHandlerRef.current);
+            }
+
+            // 创建新的事件监听器
+            clickHandlerRef.current = (event: MouseEvent) => {
                 const target = event.target as HTMLElement;
                 if (target.hasClass('internal-link')) {
                     event.preventDefault();
@@ -61,13 +67,19 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cus
                         );
                     }
                 }
-            });
+            };
+
+            // 添加新的事件监听器
+            containerRef.current.addEventListener('click', clickHandlerRef.current);
         }
 
         // 清理函数
         return () => {
             componentRoots.current.forEach(root => root.unmount());
             componentRoots.current.clear();
+            if (containerRef.current && clickHandlerRef.current) {
+                containerRef.current.removeEventListener('click', clickHandlerRef.current);
+            }
         };
     }, [content, customComponents]);
 

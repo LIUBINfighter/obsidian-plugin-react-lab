@@ -7,7 +7,7 @@ export default {
 		"welcome": "Welcome",
 		"settings": {
 			"title": "Settings",
-			"content": "You can change the language in the top right corner."  // 更新这一行
+			"content": "You can change the language in the top left corner."  // 更新这一行
 		},
 		"demos": {
 			"title": "React Component Demos",
