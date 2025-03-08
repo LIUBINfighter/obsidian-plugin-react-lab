@@ -1,5 +1,9 @@
 export default {
     translation: {
+        "sidebar": {
+            "title": "Sidebar Content",
+            "content": "This is the sidebar content"
+        },
 		"welcome": "Welcome",
 		"settings": {
 			"title": "Settings",

@@ -1,21 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarkdownRenderer } from './MarkdownRenderer';
-import { Counter, TodoList } from './DemoComponents';
-import { DragDrop } from './DemoComponents';
-import { KanbanDragDrop } from './DragDrop';
-import { ThreeColumnLayout } from './ThreeColumnLayout';
-import { KanbanLayout } from '../types';
-import { useApp } from 'obsidian';
+import { Sidebar } from './Sidebar';
 
 interface ReadMeProps {
     onLocaleChange?: (locale: string) => void;
-    kanbanLayout: KanbanLayout;
-    onLayoutChange: (layout: KanbanLayout) => void;
 }
 
 export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
     const { t, i18n } = useTranslation();
+    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
     const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newLocale = e.target.value;
@@ -35,13 +29,14 @@ export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
         'readme.features.mermaid': t('readme.features.mermaid')
     });
 
-    const customComponents = {
-        'demo-counter': Counter,
-        'demo-todo': TodoList
-    };
+
 
     return (
         <div className="readme-container">
+            <Sidebar
+                isOpen={isSidebarOpen}
+                onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+            />
             <div className="language-selector">
                 <select 
                     value={i18n.language} 
@@ -54,23 +49,9 @@ export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
             <div className="content">
                 <MarkdownRenderer 
                     content={markdownContent} 
-                    customComponents={customComponents}
+                    // customComponents={customComponents}
                 />
             </div>
-			<div className="demo-components">
-                <Counter />
-                <TodoList />
-				<DragDrop />
-			</div>
-            <div className="kanban-section">
-                <h2>看板</h2>
-                <KanbanDragDrop />
-            </div>
-            <ThreeColumnLayout
-                leftContent={<div>左侧内容区域</div>}
-                centerContent={<div>中间内容区域</div>}
-                rightContent={<div>右侧内容区域</div>}
-            />
         </div>
     );
 };
