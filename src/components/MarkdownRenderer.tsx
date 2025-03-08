@@ -11,7 +11,7 @@ interface MarkdownRendererProps {
 export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, customComponents = {} }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const componentRoots = useRef<Map<HTMLElement, Root>>(new Map());
-    const clickHandlerRef = useRef<(event: MouseEvent) => void>();
+    const clickHandlerRef = useRef<(event: MouseEvent) => void>(() => {});
 
     useEffect(() => {
         if (containerRef.current) {
@@ -27,20 +27,20 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cus
                 content,
                 containerRef.current,
                 '',
-                null
+                {} as any
             );
 
             // 使用新的 createRoot API 渲染自定义组件
             Object.entries(customComponents).forEach(([tagName, Component]) => {
                 containerRef.current?.querySelectorAll(tagName).forEach(element => {
                     const container = document.createElement('div');
-                    const props = {};
+                    const props: { [key: string]: string } = {};
                     // 获取元素的所有属性
                     Array.from(element.attributes).forEach(attr => {
                         props[attr.name] = attr.value;
                     });
                     // 获取元素的内部内容
-                    props.children = element.innerHTML;
+                    (props as any).children = element.innerHTML;
                     element.replaceWith(container);
                     const root = createRoot(container);
                     root.render(<Component {...props} />);

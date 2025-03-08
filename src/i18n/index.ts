@@ -13,6 +13,8 @@ i18n
     .init({
         resources,
         lng: 'en',
+        defaultNS: 'translation',
+        ns: ['translation'],
         interpolation: {
             escapeValue: false,
             skipOnVariables: false  // 添加这个配置以确保嵌套变量能够正确解析

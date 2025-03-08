@@ -7,7 +7,7 @@ import { ReadMeView } from "./views/readme-view";
 const DEFAULT_SETTINGS: ReactLabSettings = {
     setting: 'default',
     kanbanLayout: 'horizontal',
-    sidebarWidth: 250  // 添加默认宽度
+    sidebarWidth: 250
 }
 
 export default class ReactLabPlugin extends Plugin {

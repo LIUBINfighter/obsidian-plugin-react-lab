@@ -8,4 +8,5 @@ export type KanbanLayout = 'horizontal' | 'vertical';
 export interface ReactLabSettings {
     setting: string;
     kanbanLayout: KanbanLayout;
+    sidebarWidth: number;
 }

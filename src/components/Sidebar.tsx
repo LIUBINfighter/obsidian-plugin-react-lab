@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, UseTranslationResponse } from 'react-i18next';
+import { Namespace } from 'i18next';
 import { setIcon } from 'obsidian';
 
 interface SidebarProps {
@@ -8,7 +9,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation<Namespace>('translation');
     const [width, setWidth] = useState(250);
     const [isDragging, setIsDragging] = useState(false);
     const [activeTab, setActiveTab] = useState<string>('tab1');

@@ -1,5 +1,6 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, UseTranslationResponse } from 'react-i18next';
+import { Namespace } from 'i18next';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { Sidebar } from './Sidebar';
 
@@ -8,7 +9,7 @@ interface ReadMeProps {
 }
 
 export const ReadMe: React.FC<ReadMeProps> = ({ onLocaleChange }) => {
-    const { t, i18n } = useTranslation();
+    const { t, i18n } = useTranslation<Namespace>('translation');
     const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
     const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
