@@ -6,7 +6,7 @@
 
 ![image](https://github.com/user-attachments/assets/c5c40a07-e2b7-4f2d-bc63-53f82bee1a77)
 
-欢迎访问由 [raistlind](https://raistlind.github.io/obsidian-dev-docs-zh/) 创建，目前由我 Fork 并维护的中文obsidian插件开发文档！我正在致力于翻译优质社区内容和开发通用插件平台。
+欢迎访问由 [raistlind](https://raistlind.github.io/obsidian-dev-docs-zh/) 创建，目前由我 Fork 并维护的[中文obsidian插件开发文档](https://liubinfighter.github.io/obsidian-dev-docs-zh/)！我正在致力于翻译优质社区内容和开发通用插件平台。
 
 ## 特性
 
