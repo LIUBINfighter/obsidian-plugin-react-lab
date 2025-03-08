@@ -20,6 +20,10 @@ export class ReadMeView extends ItemView {
         return VIEW_TYPES.README;
     }
     
+    getIcon() {
+        return 'flask-conical';
+    }
+    
     getDisplayText() {
         return "React Lab Readme View";
     }

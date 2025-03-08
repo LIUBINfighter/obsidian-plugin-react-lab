@@ -23,11 +23,11 @@
 }
 .sidebar-toggle {
     position: absolute;
-    left: 4px; /* 调整到 resize 条右侧 */
-    top: 50%;
+    left: -15px; /* 调整到 resize 条右侧 */
+    top: 10%;
     transform: translateY(-50%);
     width: 30px;
-    height: 60px;
+    height: 30px;
     background-color: var(--background-primary);
     border: 1px solid var(--background-modifier-border);
     border-radius: 4px;
@@ -77,21 +77,6 @@
     background-color: var(--interactive-accent);
     color: var(--text-on-accent);
     opacity: 1;
-}
-    width: 30px;
-    height: 30px;
-    background-color: var(--background-primary);
-    border: 1px solid var(--background-modifier-border);
-    border-right: none;
-    border-radius: 4px 0 0 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    font-size: 16px;
-    color: var(--text-muted);
-    transition: all 0.2s ease;
 }
 
 .sidebar-tab:hover {

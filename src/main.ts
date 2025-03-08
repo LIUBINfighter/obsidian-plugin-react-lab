@@ -54,7 +54,7 @@ export default class ReactLabPlugin extends Plugin {
         });
 				
 		// 添加 ribbon icon
-		this.addRibbonIcon('sprout','React Lab',
+		this.addRibbonIcon('flask-conical','React Lab',
 			(evt: MouseEvent) => {
             // 激活视图
             this.activateView();
