@@ -62,9 +62,12 @@ export default class ReactLabPlugin extends Plugin {
         );
     }
 
-	async onunload() {
-
-	}
+async onunload() {
+    // 清除所有已注册的视图
+    this.app.workspace.getLeavesOfType(VIEW_TYPES.README).forEach(leaf => {
+        leaf.detach();
+    });
+}
 
 	async loadSettings() {
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
