@@ -6,7 +6,8 @@ import { ReadMeView } from "./views/readme-view";
 
 const DEFAULT_SETTINGS: ReactLabSettings = {
     setting: 'default',
-    kanbanLayout: 'horizontal'
+    kanbanLayout: 'horizontal',
+    sidebarWidth: 250  // 添加默认宽度
 }
 
 export default class ReactLabPlugin extends Plugin {
@@ -33,13 +34,14 @@ export default class ReactLabPlugin extends Plugin {
     }
 
     async onload() {
-		await this.loadSettings();
-		this.addSettingTab(new ReactLabSettingTab(this.app, this));
+        await this.loadSettings();
+        this.addSettingTab(new ReactLabSettingTab(this.app, this));
 
         // 注册 ReadMe 视图
+        // 确保在注册视图时传递 plugin 实例
         this.registerView(
             VIEW_TYPES.README,
-            (leaf) => new ReadMeView(leaf, this)
+            (leaf) => new ReadMeView(leaf, this)  // 传递 this
         );
         // 注册一个命令
         this.addCommand({

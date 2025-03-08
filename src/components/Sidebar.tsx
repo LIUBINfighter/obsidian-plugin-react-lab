@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { setIcon } from 'obsidian';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -15,9 +16,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
 
     // 定义标签页配置
     const tabs = [
-        { id: 'tab1', icon: '📝', label: '笔记' },
-        { id: 'tab2', icon: '🔍', label: '搜索' },
-        { id: 'tab3', icon: '⚙️', label: '设置' },
+        { id: 'tab1', iconId: 'document', label: '笔记' },
+        { id: 'tab2', iconId: 'search', label: '搜索' },
+        { id: 'tab3', iconId: 'gear', label: '设置' },
     ];
 
     const handleDragStart = useCallback((e: React.MouseEvent) => {

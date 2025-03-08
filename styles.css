@@ -23,14 +23,14 @@
 }
 .sidebar-toggle {
     position: absolute;
-    left: 0;
+    left: 4px; /* 调整到 resize 条右侧 */
     top: 50%;
     transform: translateY(-50%);
     width: 30px;
     height: 60px;
     background-color: var(--background-primary);
     border: 1px solid var(--background-modifier-border);
-    border-right: none;
+    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -42,15 +42,42 @@
 
 .sidebar-tabs {
     position: absolute;
-    left: 0;
-    top: 120px; /* 调整位置，避免与收起按钮冲突 */
+    left: 4px; /* 调整到 resize 条右侧 */
+    top: 80px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 8px 0;
+    gap: 12px;
+    padding: 16px 0;
 }
 
 .sidebar-tab {
+    width: 32px;
+    height: 32px;
+    background-color: var(--background-secondary-alt);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    opacity: 0.75;
+}
+
+.sidebar-tab:hover {
+    background-color: var(--background-modifier-hover);
+    color: var(--text-normal);
+    opacity: 1;
+}
+
+.sidebar-tab.active {
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+    opacity: 1;
+}
     width: 30px;
     height: 30px;
     background-color: var(--background-primary);
@@ -79,11 +106,27 @@
 }
 
 .sidebar-content {
-    padding: 20px;
+    padding: 20px 24px 20px 54px; /* 增加左侧内边距，为按钮和 resize 条留出空间 */
     height: 100%;
     overflow-y: auto;
     width: 100%;
-}.sidebar-drag-handle {
+    color: var(--text-normal);
+}
+
+.sidebar-content h3 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-normal);
+}
+
+.sidebar-content p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+.sidebar-drag-handle {
     position: absolute;
     left: 0;
     top: 0;
@@ -417,4 +460,18 @@
     flex: 1;
     padding: 16px;
     overflow-y: auto;
+}
+.sidebar-tab svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.sidebar-tab:hover svg {
+    color: var(--text-normal);
+}
+
+.sidebar-tab.active svg {
+    color: var(--text-on-accent);
 }
