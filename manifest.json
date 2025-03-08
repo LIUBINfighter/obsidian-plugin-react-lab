@@ -1,11 +1,11 @@
 {
 	"id": "react lab",
 	"name": "React Lab",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "Place for fun and learning",
+	"description": "A sample ReadmeView (in workspace) build with react. Place for fun and development.",
 	"author": "Jay Bridge",
-	"authorUrl": "",
+	"authorUrl": "https://github.com/LIUBINfighter/obsidian-plugin-react-lab",
 	"fundingUrl": "",
 	"isDesktopOnly": false
 }
