@@ -66,18 +66,27 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
             </button>
             
             <div className="sidebar-tabs">
-                {tabs.map(tab => (
-                    <button
-                        key={tab.id}
-                        className={`sidebar-tab ${activeTab === tab.id ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab.id)}
-                        title={tab.label}
-                    >
-                        {tab.icon}
-                    </button>
-                ))}
-            </div>
+                {tabs.map(tab => {
+                    const iconContainer = React.useRef<HTMLSpanElement>(null);
+                    
+                    React.useEffect(() => {
+                        if (iconContainer.current) {
+                            setIcon(iconContainer.current, tab.iconId);
+                        }
+                    }, [tab.iconId]);
 
+                    return (
+                        <button
+                            key={tab.id}
+                            className={`sidebar-tab ${activeTab === tab.id ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab.id)}
+                            title={tab.label}
+                        >
+                            <span ref={iconContainer} className="sidebar-tab-icon" />
+                        </button>
+                    );
+                })}
+            </div>
             <div 
                 ref={dragHandleRef}
                 className="sidebar-drag-handle"
