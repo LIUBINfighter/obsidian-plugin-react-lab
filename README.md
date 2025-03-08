@@ -1,6 +1,10 @@
 # Obsidian React Lab Plugin
 
+![image](https://github.com/user-attachments/assets/c027cd55-13ea-4504-a918-8195ee9c44dc)
+
 这是一个用于在Obsidian中进行React开发实验的插件平台。
+
+欢迎访问由[raistlind](https://raistlind.github.io/obsidian-dev-docs-zh/)创建，目前由我维护的中文obsidian插件开发文档！我正在致力于翻译优质社区内容和开发通用插件平台。
 
 ## 特性
 
