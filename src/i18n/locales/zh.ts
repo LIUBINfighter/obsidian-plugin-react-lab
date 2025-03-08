@@ -1,5 +1,9 @@
 export default {
     translation:{
+        "sidebar": {
+            "title": "边栏内容",
+            "content": "这里是边栏的内容"
+        },
 		"welcome": "欢迎来到Jay的React Lab!",
 		"settings": {
 			"title": "设置",
